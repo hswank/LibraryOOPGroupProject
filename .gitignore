@@ -1,0 +1,8 @@
+.classpath
+.project
+.settings/
+.OS_Store
+log/
+target/
+*.class
+/bin
