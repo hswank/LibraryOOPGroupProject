@@ -2,7 +2,7 @@
 public class libraryApp {
 
 	public static void main(String[] args) {
-		// conflict comment
+		// Heather's comment
 	}
 
 }
