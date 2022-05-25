@@ -38,8 +38,8 @@ public class VideoGame extends Media {
 	@Override
 	public void checkIn() {
 		
-			setStatus("On Shelf");
-			setDueDate(0);	
+		setStatus("On Shelf");
+		setDueDate(0);	
 			
 	}
 
