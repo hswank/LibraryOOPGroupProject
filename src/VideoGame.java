@@ -69,4 +69,9 @@ public class VideoGame extends Media {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return getTitle() + " for " + getConsole() + ".";
+	}
+	
 }
