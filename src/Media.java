@@ -6,7 +6,7 @@ public abstract class Media {
 	private String title;
 	private String releaseDate;
 	private String genre;
-	private boolean status;
+	private String status;
 	private int condition;
 	private int dueDate;
 	
@@ -29,10 +29,10 @@ public abstract class Media {
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public int getCondition() {
