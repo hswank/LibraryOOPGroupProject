@@ -9,6 +9,7 @@ public class Book extends Media {
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
+		setStatus("On Shelf");
 	}
 
 	public ArrayList<String> getAuthor() {
@@ -49,8 +50,8 @@ public class Book extends Media {
 	}
 
 	public void printDetails() {
-		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%nThis book is due in %d days", getTitle(),
-				getAuthor(), getReleaseDate(), getGenre(), getStatus(), getDueDate());
+		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+				getAuthor(), getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override

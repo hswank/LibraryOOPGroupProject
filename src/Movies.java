@@ -66,10 +66,9 @@ public class Movies extends Media{
 	public void renew() {
 		//get variables
 		int condition = getCondition();
-		int dueDate = getDueDate();
 		//add 14 to dueDate and increment condition
-		setCondition(condition ++);
-		setDueDate(dueDate + 14);
+		setCondition(condition --);
+		setDueDate(getDueDate() + 14);
 	}
 	public void printDetails() {
 		//print details
