@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class Book extends Media {
 	private ArrayList<String> author;
 
-	public Book(String title, String author, String releaseDate, String genre) {
+	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
 		setTitle(title);
-		this.author.add(author);
+		setAuthor(author);
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
@@ -16,8 +16,8 @@ public class Book extends Media {
 		return author;
 	}
 
-	public void setAuthor(String author) {
-		this.author.add(author);
+	public void setAuthor(ArrayList<String> author) {
+		this.author = author;
 	}
 
 	@Override
