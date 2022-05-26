@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class libraryApp {
-
+	
 	public static void main(String[] args) {
-		//data
+		//data ArrayList
 		ArrayList<Media> catalog = new ArrayList<>();
 		//movies
 		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Steven Spielberg")), 124, "Jaws", "1975", "Thriller"));
