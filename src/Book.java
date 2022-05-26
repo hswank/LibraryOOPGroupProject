@@ -50,8 +50,10 @@ public class Book extends Media {
 	}
 
 	public void printDetails() {
+		String authorList = "";
+		for (String author : getAuthor()) {authorList += author; authorList += " ";}
 		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				getAuthor(), getReleaseDate(), getGenre(), getStatus());
+				authorList, getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override

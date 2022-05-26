@@ -72,13 +72,17 @@ public class Movie extends Media{
 	}
 	public void printDetails() {
 		//print details
+		String directorList = "";
+		for (String director : getDirector()) {directorList += director; directorList += " ";}
 		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				getDirector(), getReleaseDate(), getGenre(), getStatus());
+				directorList, getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override
 	public String toString() {
 		//print smaller version of details
-		return getTitle() + " (" + getReleaseDate() + ")";
+		String directorList = "";
+		for (String director : getDirector()) {directorList += director; directorList += " ";}
+		return getTitle() + " by " + directorList;
 	}
 }
