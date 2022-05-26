@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Movies extends Media{
+public class Movie extends Media{
 	
 	//fields
 	private ArrayList<String> director;
@@ -21,7 +21,7 @@ public class Movies extends Media{
 	}
 	
 	//constructors
-	public Movies (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
 		this.director = director;
 		this.runTime = runTime;
 		setTitle(title);

@@ -8,12 +8,12 @@ public class libraryApp {
 		ArrayList<Media> catalog = new ArrayList<>();
 		// movies
 		catalog.add(
-				new Movies(new ArrayList<String>(Arrays.asList("Steven Spielberg")), 124, "Jaws", "1975", "Thriller"));
-		catalog.add(new Movies(new ArrayList<String>(Arrays.asList("George Lucas")), 121, "Star Wars: A New Hope",
+				new Movie(new ArrayList<String>(Arrays.asList("Steven Spielberg")), 124, "Jaws", "1975", "Thriller"));
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("George Lucas")), 121, "Star Wars: A New Hope",
 				"1977", "Sci-Fi"));
-		catalog.add(new Movies(new ArrayList<String>(Arrays.asList("Peter Jackson")), 169, "The Hobbit", "2012",
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Peter Jackson")), 169, "The Hobbit", "2012",
 				"Fantasy"));
-		catalog.add(new Movies(new ArrayList<String>(Arrays.asList("Martin Scorsese")), 180, "The Wolf Of Wallstreet",
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Martin Scorsese")), 180, "The Wolf Of Wallstreet",
 				"2013", "Drama"));
 		// books
 		catalog.add(new Book("Fear And Loathing In Las Vegas",
@@ -24,10 +24,10 @@ public class libraryApp {
 				"Fantasy"));
 		catalog.add(new Book("Grant", new ArrayList<String>(Arrays.asList("Ron Chernow")), "2017", "Biography"));
 		// video games
-		catalog.add(new VideoGame("Sony", "PlayStation", "Crash Bandicoot", "1996", "Platformer"));
-		catalog.add(new VideoGame("Microsoft", "Xbox", "Halo", "2001", "First Person Shooter"));
-		catalog.add(new VideoGame("Nintendo", "N64", "Super Mario 64", "1996", "Platformer"));
-		catalog.add(new VideoGame("Blizzard", "PC", "World of Warcraft", "2004", "MMO RPG"));
+		catalog.add(new Game("Sony", "PlayStation", "Crash Bandicoot", "1996", "Platformer"));
+		catalog.add(new Game("Microsoft", "Xbox", "Halo", "2001", "First Person Shooter"));
+		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996", "Platformer"));
+		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004", "MMO RPG"));
 
 		printCatalog(catalog);
 		
@@ -35,7 +35,7 @@ public class libraryApp {
 		
 		System.out.println();
 		
-		Movies movie = new Movies(new ArrayList<String>(Arrays.asList("George Lucas")), 124, "Star Wars: Return of the Jedi", "1979", "Sci-Fi");
+		Movie movie = new Movie(new ArrayList<String>(Arrays.asList("George Lucas")), 124, "Star Wars: Return of the Jedi", "1979", "Sci-Fi");
 		movie.printDetails();
 
 //		for(Media content : catalog) {
@@ -56,8 +56,8 @@ public class libraryApp {
 	public static void searchByCreator(String creator, ArrayList<Media> catalog) {
 		System.out.println("\n\nSearch results for \"" + creator + "\":\n");
 		for (Media item : catalog) {
-			if (item instanceof Movies) {
-				Movies movie = (Movies) item;
+			if (item instanceof Movie) {
+				Movie movie = (Movie) item;
 				for (String director : movie.getDirector()) {
 					if (director.toLowerCase().contains(creator.toLowerCase())) {
 						System.out.println(movie.toString());
@@ -70,8 +70,8 @@ public class libraryApp {
 						System.out.println(book.toString());
 					}
 				}
-			} else if (item instanceof VideoGame) {
-				VideoGame vGame = (VideoGame) item;
+			} else if (item instanceof Game) {
+				Game vGame = (Game) item;
 				if (vGame.getPublisher().toLowerCase().contains(creator.toLowerCase())) {
 					System.out.println(vGame.toString());
 				}
