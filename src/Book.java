@@ -5,7 +5,7 @@ public class Book extends Media {
 
 	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
 		setTitle(title);
-		this.author = author;
+		setAuthor(author);
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
