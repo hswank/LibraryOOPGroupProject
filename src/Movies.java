@@ -10,8 +10,8 @@ public class Movies extends Media{
 	public ArrayList<String> getDirector() {
 		return director;
 	}
-	public void setDirector(ArrayList<String> director) {
-		this.director = director;
+	public void setDirector(String director) {
+		this.director.add(director);
 	}
 	public int getRunTime() {
 		return runTime;
