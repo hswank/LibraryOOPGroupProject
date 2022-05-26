@@ -5,7 +5,6 @@ public class libraryApp {
 	public static void main(String[] args) {
 		//data
 		ArrayList<Media> catalog = new ArrayList<>();
-
 		//movies
 		catalog.add(new Movies("Steven Spielberg", 124, "Jaws", "1975", "Thriller"));
 		catalog.add(new Movies("George Lucas", 121, "Star Wars: A New Hope", "1977", "Sci-Fi"));
@@ -21,8 +20,9 @@ public class libraryApp {
 		catalog.add(new VideoGame("Microsoft", "Xbox", "Halo", "2001","First Person Shooter"));
 		catalog.add(new VideoGame("Nintendo", "N64", "Super Mario 64", "1996","Platformer"));
 		catalog.add(new VideoGame("Blizzard", "PC", "World of Warcraft", "2004","MMO RPG"));
-
 	}
+	
+	
 
 	
 }

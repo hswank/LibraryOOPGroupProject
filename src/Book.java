@@ -37,8 +37,6 @@ public class Book extends Media {
 		} else if (getStatus().equals("Checked out")) {
 			System.out.println("This item has been checked out already.  Would you like to place a hold?");
 		}
-
-
 	}
 
 	@Override
