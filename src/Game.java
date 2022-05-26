@@ -69,7 +69,7 @@ public class Game extends Media {
 	
 	public void printDetails() {
 		//print details
-		System.out.printf("%s on %s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+		System.out.printf("%s on %s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
 				getConsole(), getPublisher(),getReleaseDate(), getGenre(), getStatus());
 	
 	}
