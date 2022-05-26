@@ -1,10 +1,10 @@
 
-public class VideoGame extends Media {
+public class Game extends Media {
 
 	String publisher;
 	String console;
 
-	public VideoGame(String publisher, String console, String title, String releaseDate, String genre) {
+	public Game(String publisher, String console, String title, String releaseDate, String genre) {
 		
 		this.publisher = publisher;
 		this.console = console;

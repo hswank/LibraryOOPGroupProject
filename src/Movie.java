@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Movies extends Media{
+public class Movie extends Media{
 	
 	//fields
 	private ArrayList<String> director;
@@ -10,8 +10,8 @@ public class Movies extends Media{
 	public ArrayList<String> getDirector() {
 		return director;
 	}
-	public void setDirector(String director) {
-		this.director.add(director);
+	public void setDirector(ArrayList<String> director) {
+		this.director = director;
 	}
 	public int getRunTime() {
 		return runTime;
@@ -21,8 +21,8 @@ public class Movies extends Media{
 	}
 	
 	//constructors
-	public Movies (String director, int runTime, String title, String releaseDate, String genre) {
-		this.director.add(director);
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+		this.director = director;
 		this.runTime = runTime;
 		setTitle(title);
 		setReleaseDate(releaseDate);
@@ -72,13 +72,17 @@ public class Movies extends Media{
 	}
 	public void printDetails() {
 		//print details
-		System.out.printf("%s directed by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
-				getDirector(), getReleaseDate(), getGenre(), getStatus());
+		String directorList = "";
+		for (String director : getDirector()) {directorList += director; directorList += " ";}
+		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
+				directorList, getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override
 	public String toString() {
 		//print smaller version of details
-		return getTitle() + " (" + getReleaseDate() + ")";
+		String directorList = "";
+		for (String director : getDirector()) {directorList += director; directorList += " ";}
+		return getTitle() + " by " + directorList;
 	}
 }

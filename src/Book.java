@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class Book extends Media {
 	private ArrayList<String> author;
 
-	public Book(String title, String author, String releaseDate, String genre) {
+	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
 		setTitle(title);
-		this.author.add(author);
+		this.author = author;
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
@@ -16,8 +16,8 @@ public class Book extends Media {
 		return author;
 	}
 
-	public void setAuthor(String author) {
-		this.author.add(author);
+	public void setAuthor(ArrayList<String> author) {
+		this.author = author;
 	}
 
 	@Override
@@ -50,13 +50,17 @@ public class Book extends Media {
 	}
 
 	public void printDetails() {
-		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%nThis book is due in %d days", getTitle(),
-				getAuthor(), getReleaseDate(), getGenre(), getStatus(), getDueDate());
+		String authorList = "";
+		for (String author : getAuthor()) {authorList += author; authorList += " ";}
+		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
+				authorList, getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override
 	public String toString() {
-		return getTitle() + " by " + getAuthor();
+		String authorList = "";
+		for (String author : getAuthor()) {authorList += author; authorList += " ";}
+		return getTitle() + " by " + authorList;
 	}
 
 }
