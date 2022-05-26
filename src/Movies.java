@@ -72,7 +72,7 @@ public class Movies extends Media{
 	}
 	public void printDetails() {
 		//print details
-		System.out.printf("%s directed by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
 				getDirector(), getReleaseDate(), getGenre(), getStatus());
 	}
 

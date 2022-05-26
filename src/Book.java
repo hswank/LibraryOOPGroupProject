@@ -50,13 +50,15 @@ public class Book extends Media {
 	}
 
 	public void printDetails() {
-		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
 				getAuthor(), getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override
 	public String toString() {
-		return getTitle() + " by " + getAuthor();
+		String authorList = "";
+		for (String author : getAuthor()) {authorList += author; authorList += " ";}
+		return getTitle() + " by " + authorList;
 	}
 
 }

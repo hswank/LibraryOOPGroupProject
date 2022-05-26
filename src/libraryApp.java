@@ -31,7 +31,12 @@ public class libraryApp {
 
 		printCatalog(catalog);
 		
-		searchByCreator("peter", catalog);
+		searchByCreator("martin", catalog);
+		
+		System.out.println();
+		
+		Movies movie = new Movies(new ArrayList<String>(Arrays.asList("George Lucas")), 124, "Star Wars: Return of the Jedi", "1979", "Sci-Fi");
+		movie.printDetails();
 
 //		for(Media content : catalog) {
 //			if (content.getGenre().equals("Drama")) {
