@@ -10,8 +10,8 @@ public class Movies extends Media{
 	public ArrayList<String> getDirector() {
 		return director;
 	}
-	public void setDirector(String director) {
-		this.director.add(director);
+	public void setDirector(ArrayList<String> director) {
+		this.director = director;
 	}
 	public int getRunTime() {
 		return runTime;
@@ -21,8 +21,8 @@ public class Movies extends Media{
 	}
 	
 	//constructors
-	public Movies (String director, int runTime, String title, String releaseDate, String genre) {
-		this.director.add(director);
+	public Movies (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+		this.director = director;
 		this.runTime = runTime;
 		setTitle(title);
 		setReleaseDate(releaseDate);

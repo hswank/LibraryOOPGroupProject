@@ -70,7 +70,7 @@ public class VideoGame extends Media {
 	public void printDetails() {
 		//print details
 		System.out.printf("%s on %s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
-				getConsole(), getPublisher(),getReleaseDate(), getGenre(), getStatus());
+				getConsole(), getPublisher(), getReleaseDate(), getGenre(), getStatus());
 	}
 	
 	@Override
