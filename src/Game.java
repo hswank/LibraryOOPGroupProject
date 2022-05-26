@@ -71,6 +71,7 @@ public class Game extends Media {
 		//print details
 		System.out.printf("%s on %s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
 				getConsole(), getPublisher(),getReleaseDate(), getGenre(), getStatus());
+	
 	}
 	
 	@Override
