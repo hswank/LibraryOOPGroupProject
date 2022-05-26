@@ -21,15 +21,15 @@ public class Movies extends Media{
 	}
 	
 	//constructors
-	public void Movie (String director, int runTime, String title, String releaseDate, String genre, String status, int dueDate) {
+	public Movies (String director, int runTime, String title, String releaseDate, String genre) {
 		this.director.add(director);
 		this.runTime = runTime;
 		setTitle(title);
 		setReleaseDate(releaseDate);
 		setGenre(genre);
-		setStatus(status);
+		setStatus("On Shelf");
 		setCondition(100);
-		setDueDate(dueDate);
+		setDueDate(0);
 	}
 	
 	//methods
@@ -73,8 +73,8 @@ public class Movies extends Media{
 	}
 	public void printDetails() {
 		//print details
-		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%nThis book is due in %d days", getTitle(),
-				getDirector(), getReleaseDate(), getGenre(), getStatus(), getDueDate());
+		System.out.printf("%s directed by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+				getDirector(), getReleaseDate(), getGenre(), getStatus());
 	}
 
 	@Override
