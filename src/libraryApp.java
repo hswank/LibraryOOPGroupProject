@@ -21,16 +21,57 @@ public class libraryApp {
 		catalog.add(new Game("Microsoft", "Xbox", "Halo", "2001","First Person Shooter"));
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996","Platformer"));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004","MMO RPG"));
-		
-		recycle(catalog);
+	}
+	
+	public static void printCatalog(ArrayList<Media> catalog) {
+		System.out.printf("%-35s%-20s%n", "Title", "Format");
+		System.out.println("--------------------------------------------");
+		for (Media item : catalog) {
+			System.out.printf("%-35s%-20s%n", item.getTitle(), item.getClass().getSimpleName());
+		}
+	}
+	
+	public static void searchByGenre (String genre, ArrayList<Media> catalog){
+		for(Media content : catalog){
+	        if(content.getGenre().equals(genre)){
+	        	System.out.println(content);
+	        }
+	           
+	    }
 	}
 	
 	public static void searchByTitle (ArrayList<Media> catalog, String title){
-			for(Media content : catalog) {
-				if (content.getTitle().equals(title)) {
-					System.out.println(content);
+		for(Media content : catalog) {
+			if (content.getTitle().equals(title)) {
+				System.out.println(content);
+			}
+		}
+	}
+	
+	public static void searchByCreator(String creator, ArrayList<Media> catalog) {
+		System.out.println("\n\nSearch results for \"" + creator + "\":\n");
+		for (Media item : catalog) {
+			if (item instanceof Movie) {
+				Movie movie = (Movie) item;
+				for (String director : movie.getDirector()) {
+					if (director.toLowerCase().contains(creator.toLowerCase())) {
+						System.out.println(movie.toString());
+					}
+				}
+			} else if (item instanceof Book) {
+				Book book = (Book) item;
+				for (String author : book.getAuthor()) {
+					if (author.toLowerCase().contains(creator.toLowerCase())) {
+						System.out.println(book.toString());
+					}
+				}
+			} else if (item instanceof Game) {
+				Game vGame = (Game) item;
+				if (vGame.getPublisher().toLowerCase().contains(creator.toLowerCase())) {
+					System.out.println(vGame.toString());
 				}
 			}
+		}
 	}
 	
 	public static ArrayList<Media> recycle(ArrayList<Media> catalog) {
@@ -43,6 +84,19 @@ public class libraryApp {
 		return catalog;
 	}
 	
-
+	public static Book donateBook(String title, ArrayList<String> author, String releaseDate, String genre) {
+		Book b = new Book(title, author, releaseDate, genre);
+		return b;
+	}
 	
+	public static Game donateGame(String pub, String console, String title, String releaseDate, String genre) {
+		Game g = new Game(pub, console, title, releaseDate, genre);
+		return g;
+	}
+	
+	public static Movie donateMovie(ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+		Movie m = new Movie(director, runTime, title, releaseDate, genre);
+		return m;
+	}
+
 }
