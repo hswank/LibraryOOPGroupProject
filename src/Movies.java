@@ -1,16 +1,17 @@
+import java.util.ArrayList;
 
 public class Movies extends Media{
 	
 	//fields
-	private String director;
+	private ArrayList<String> director;
 	private int runTime;
 	
 	//getters/setters
-	public String getDirector() {
+	public ArrayList<String> getDirector() {
 		return director;
 	}
 	public void setDirector(String director) {
-		this.director = director;
+		this.director.add(director);
 	}
 	public int getRunTime() {
 		return runTime;
@@ -21,7 +22,7 @@ public class Movies extends Media{
 	
 	//constructors
 	public void Movie (String director, int runTime, String title, String releaseDate, String genre, String status, int dueDate) {
-		this.director = director;
+		this.director.add(director);
 		this.runTime = runTime;
 		setTitle(title);
 		setReleaseDate(releaseDate);
@@ -65,9 +66,19 @@ public class Movies extends Media{
 	public void renew() {
 		//get variables
 		int condition = getCondition();
-		int dueDate = getDueDate();
 		//add 14 to dueDate and increment condition
-		setCondition(condition ++);
-		setDueDate(dueDate + 14);
+		setCondition(condition --);
+		setDueDate(getDueDate() + 14);
+	}
+	public void printDetails() {
+		//print details
+		System.out.printf("%s by %s%nReleased: %d%nGenre: %s%nStatus: %s%nThis book is due in %d days", getTitle(),
+				getDirector(), getReleaseDate(), getGenre(), getStatus(), getDueDate());
+	}
+
+	@Override
+	public String toString() {
+		//print smaller version of details
+		return getTitle() + " (" + getReleaseDate() + ")";
 	}
 }
