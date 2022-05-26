@@ -4,16 +4,16 @@ public class VideoGame extends Media {
 	String publisher;
 	String console;
 
-	public VideoGame(String publisher, String console, String title, String releaseDate, String genre, String status, int dueDate) {
+	public VideoGame(String publisher, String console, String title, String releaseDate, String genre) {
 		
 		this.publisher = publisher;
 		this.console = console;
 		setTitle(title);
 		setReleaseDate(releaseDate);
 		setGenre(genre);
-		setStatus(status);
+		setStatus("On Shelf");
 		setCondition(100);
-		setDueDate(dueDate);
+		setDueDate(0);
 	
 	}
 
@@ -65,6 +65,12 @@ public class VideoGame extends Media {
 		setCondition(getCondition() - 2);
 		setDueDate(getDueDate() + 14);
 		
+	}
+	
+	public void printDetails() {
+		//print details
+		System.out.printf("%s on %s by %s%nReleased: %d%nGenre: %s%nStatus: %s%n", getTitle(),
+				getConsole(), getPublisher(),getReleaseDate(), getGenre(), getStatus());
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ public class Book extends Media {
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
+		setStatus("On Shelf");
 	}
 
 	public ArrayList<String> getAuthor() {
