@@ -21,7 +21,7 @@ public class Movie extends Media{
 	}
 	
 	//constructors
-	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre, int itemCode) {
 		this.director = director;
 		this.runTime = runTime;
 		setTitle(title);
@@ -30,6 +30,7 @@ public class Movie extends Media{
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
+		setItemCode(itemCode);
 	}
 	
 	//methods
@@ -74,8 +75,8 @@ public class Movie extends Media{
 		//print details
 		String directorList = "";
 		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				directorList, getReleaseDate(), getGenre(), getStatus());
+		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				directorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
@@ -83,6 +84,6 @@ public class Movie extends Media{
 		//print smaller version of details
 		String directorList = "";
 		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		return getTitle() + " by " + directorList;
+		return getItemCode() + ": " + getTitle() + " by " + directorList;
 	}
 }

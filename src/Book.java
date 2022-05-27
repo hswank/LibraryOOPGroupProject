@@ -3,13 +3,14 @@ import java.util.ArrayList;
 public class Book extends Media {
 	private ArrayList<String> author;
 
-	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
+	public Book(String title, ArrayList<String> author, String releaseDate, String genre, int itemCode) {
 		setTitle(title);
 		setAuthor(author);
 		setReleaseDate(releaseDate);
 		setGenre(genre);
 		setCondition(100);
 		setStatus("On Shelf");
+		setItemCode(itemCode);
 	}
 
 	public ArrayList<String> getAuthor() {
@@ -52,15 +53,15 @@ public class Book extends Media {
 	public void printDetails() {
 		String authorList = "";
 		for (String author : getAuthor()) {authorList += author; authorList += " ";}
-		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				authorList, getReleaseDate(), getGenre(), getStatus());
+		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				authorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
 	public String toString() {
 		String authorList = "";
 		for (String author : getAuthor()) {authorList += author; authorList += " ";}
-		return getTitle() + " by " + authorList;
+		return getItemCode() + ": " + getTitle() + " by " + authorList;
 	}
 
 }
