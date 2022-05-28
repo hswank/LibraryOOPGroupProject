@@ -19,21 +19,25 @@ public class Book extends Media {
 	public void setAuthor(ArrayList<String> author) {
 		this.author = author;
 	}
+	
+	public void addAuthor(String authorName) {
+		author.add(authorName);
+	}
 
 	@Override
 	public void checkIn() {
-		setStatus("On shelf");
+		setStatus("On Shelf");
 		setDueDate(0);
 	}
 
 	@Override
 	public void checkOut() {
-		if (getStatus().equals("On shelf")) {
+		if (getStatus().equals("On Shelf")) {
 			int condition = getCondition();
 			condition -= 5;
 			setCondition(condition);
 			setDueDate(14);
-			setStatus("Checked out");
+			setStatus("Checked Out");
 		} else if (getStatus().equals("Checked out")) {
 			System.out.println("This item has been checked out already.  Would you like to place a hold?");
 		}
@@ -51,7 +55,17 @@ public class Book extends Media {
 
 	public void printDetails() {
 		String authorList = "";
-		for (String author : getAuthor()) {authorList += author; authorList += " ";}
+			if (getAuthor().size() == 1) {
+				authorList += getAuthor().get(0);
+			} else {
+				int i = 0;
+				while (i < getAuthor().size() - 1) {
+					authorList += getAuthor().get(i);
+					authorList += ", ";
+					i++;
+				}
+				authorList += getAuthor().get(i);
+			}
 		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
 				authorList, getReleaseDate(), getGenre(), getStatus());
 	}
@@ -59,7 +73,17 @@ public class Book extends Media {
 	@Override
 	public String toString() {
 		String authorList = "";
-		for (String author : getAuthor()) {authorList += author; authorList += " ";}
+		if (getAuthor().size() == 1) {
+			authorList += getAuthor().get(0);
+		} else {
+			int i = 0;
+			while (i < getAuthor().size() - 1) {
+				authorList += getAuthor().get(i);
+				authorList += ", ";
+				i++;
+			}
+			authorList += getAuthor().get(i);
+		}
 		return getTitle() + " by " + authorList;
 	}
 
