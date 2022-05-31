@@ -21,7 +21,7 @@ public class Movie extends Media{
 	}
 	
 	//constructors
-	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre, int itemCode) {
 		this.director = director;
 		this.runTime = runTime;
 		setTitle(title);
@@ -30,18 +30,19 @@ public class Movie extends Media{
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
+		setItemCode(itemCode);
 	}
 	
 	//methods
 	@Override
 	public void checkOut() {
 		//get variable condition from super class so i can decrement it later
-		int condition = getCondition();
+		int cond = getCondition();
 		//false means on shelf
 		if (getStatus().equals("On Shelf")) {
 			setStatus("Checked Out");
 			//Decrement condition
-			setCondition(condition --);
+			setCondition(cond - 1);
 			//set due date
 			setDueDate(14);
 			//message
@@ -65,17 +66,17 @@ public class Movie extends Media{
 	@Override
 	public void renew() {
 		//get variables
-		int condition = getCondition();
+		int cond = getCondition();
 		//add 14 to dueDate and increment condition
-		setCondition(condition --);
+		setCondition(cond - 1);
 		setDueDate(getDueDate() + 14);
 	}
 	public void printDetails() {
 		//print details
 		String directorList = "";
 		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				directorList, getReleaseDate(), getGenre(), getStatus());
+		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				directorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
@@ -83,6 +84,10 @@ public class Movie extends Media{
 		//print smaller version of details
 		String directorList = "";
 		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		return getTitle() + " by " + directorList;
+		return getItemCode() + ": " + getTitle() + " by " + directorList;
+	}
+	
+	public void addDirector(String dir) {
+		director.add(dir);
 	}
 }

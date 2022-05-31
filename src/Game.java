@@ -1,10 +1,9 @@
-
 public class Game extends Media {
 
 	String publisher;
 	String console;
 
-	public Game(String publisher, String console, String title, String releaseDate, String genre) {
+	public Game(String publisher, String console, String title, String releaseDate, String genre, int itemCode) {
 		
 		this.publisher = publisher;
 		this.console = console;
@@ -14,6 +13,7 @@ public class Game extends Media {
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
+		setItemCode(itemCode);
 	
 	}
 
@@ -49,7 +49,7 @@ public class Game extends Media {
 			setCondition(getCondition() - 2);
 			setDueDate(14);
 			
-		System.out.println("You've checked out: " + getDueDate() + ".");
+		System.out.println("You've checked out: " + getTitle() + ".");
 		System.out.println("This videogame is due in " + getDueDate() + " days.");
 		} else if(getStatus().equals("Checked Out")) {
 			System.out.println("This video game is checked out, would you like to place a hold?");
@@ -69,14 +69,14 @@ public class Game extends Media {
 	
 	public void printDetails() {
 		//print details
-		System.out.printf("%s on %s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				getConsole(), getPublisher(), getReleaseDate(), getGenre(), getStatus());
+		System.out.printf("%s on %s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				getConsole(), getPublisher(), getReleaseDate(), getGenre(), getStatus(), getItemCode());
 
 	}
 	
 	@Override
 	public String toString() {
-		return getTitle() + " for " + getConsole() + ".";
+		return getItemCode() + ": " + getTitle() + " for " + getConsole() + ".";
 	}
 	
 }
