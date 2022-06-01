@@ -32,7 +32,16 @@ public class Movie extends Media{
 		setDueDate(0);
 		setItemCode(itemCode);
 	}
-	
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+		this.director = director;
+		this.runTime = runTime;
+		setTitle(title);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setStatus("On Shelf");
+		setCondition(100);
+		setDueDate(0);
+	}
 	//methods
 	@Override
 	public void checkOut() {
@@ -48,11 +57,7 @@ public class Movie extends Media{
 			//message
 			System.out.println("You've checked out: " + getTitle()
 					+ "\nIt is due in " + getDueDate() + " days");
-		} else if (getStatus().equals("Checked Out")) {
-			//message
-			System.out.println("This item is checked out, would you like to place a hold?");
-		}
-		else {
+		}else {
 			//message
 			System.out.println("That movie is currently checked out");
 		}
@@ -74,18 +79,38 @@ public class Movie extends Media{
 	public void printDetails() {
 		//print details
 		String directorList = "";
-		for (String director : getDirector()) {directorList += director; directorList += " ";}
+		if (getDirector().size() == 1) {
+			directorList += getDirector().get(0);
+		} else {
+			int i = 0;
+			while (i < getDirector().size() - 1) {
+				directorList += getDirector().get(i);
+				directorList += ", ";
+				i++;
+			}
+			directorList += getDirector().get(i);
+		}
 		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
 				directorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
 	public String toString() {
-		//print smaller version of details
 		String directorList = "";
-		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		return getItemCode() + ": " + getTitle() + " by " + directorList;
+		if (getDirector().size() == 1) {
+			directorList += getDirector().get(0);
+		} else {
+			int i = 0;
+			while (i < getDirector().size() - 1) {
+				directorList += getDirector().get(i);
+				directorList += ", ";
+				i++;
+			}
+			directorList += getDirector().get(i);
+		}
+		return getTitle() + " by " + directorList;
 	}
+
 	
 	public void addDirector(String dir) {
 		director.add(dir);
