@@ -31,6 +31,7 @@ public class libraryApp {
 		
 		while(continueProgram) {
 		System.out.println("Welcome to the Grand Circus Library!");
+		
 		printMenu();
 		userMainMenuSelection = scnr.nextInt();
 		
