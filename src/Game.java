@@ -18,7 +18,6 @@ public class Game extends Media {
 	}
 
 	public Game(String publisher, String console, String title, String releaseDate, String genre) {
-		
 		this.publisher = publisher;
 		this.console = console;
 		setTitle(title);

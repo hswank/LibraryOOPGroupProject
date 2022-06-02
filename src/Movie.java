@@ -32,6 +32,7 @@ public class Movie extends Media{
 		setDueDate(0);
 		setItemCode(itemCode);
 	}
+
 	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
 		this.director = director;
 		this.runTime = runTime;
@@ -41,6 +42,7 @@ public class Movie extends Media{
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
+		
 	}
 	//methods
 	@Override
@@ -108,7 +110,7 @@ public class Movie extends Media{
 			}
 			directorList += getDirector().get(i);
 		}
-		return getTitle() + " by " + directorList;
+		return getTitle() + " by " + directorList;	
 	}
 
 	
