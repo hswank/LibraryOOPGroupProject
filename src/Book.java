@@ -76,8 +76,8 @@ public class Book extends Media {
 				}
 				authorList += getAuthor().get(i);
 			}
-		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				authorList, getReleaseDate(), getGenre(), getStatus());
+		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				authorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class Book extends Media {
 			}
 			authorList += getAuthor().get(i);
 		}
-		return getTitle() + " by " + authorList;
+		return getItemCode() + ": " + getTitle() + " by " + authorList;
 	}
 
 }

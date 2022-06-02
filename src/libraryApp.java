@@ -29,6 +29,12 @@ public class libraryApp {
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996","Platformer", 303));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004","MMO RPG", 304));
 		
+		Game poop = new Game("Sony", "poop", "poop games", "2023", "fun");
+		addToCatalog(poop, catalog);
+		for (Media item: catalog) {
+			System.out.println(item.toString());
+		}
+		
 		while(continueProgram) {
 		System.out.println("Welcome to the Grand Circus Library!");
 		printMenu();
@@ -277,5 +283,36 @@ public class libraryApp {
 		
 		Movie m = new Movie(directors, runTime, movieTitle, releaseDate, genre);
 		return m;
+	}
+	
+	public static void addToCatalog(Media newMedia, ArrayList<Media> catalog) {
+		int itemCodeHolder = 0;
+		if (newMedia.getClass().getSimpleName().equals("Book")) {
+			int i = 0;
+			itemCodeHolder = 0;
+			while (i < catalog.size()) {
+				itemCodeHolder = catalog.get(i).getItemCode();
+				i++;
+			}
+			itemCodeHolder++;
+		} else if (newMedia.getClass().getSimpleName().equals("Movie")) {
+			int i = 0;
+			itemCodeHolder = 0;
+			while (i < catalog.size()) {
+				itemCodeHolder = catalog.get(i).getItemCode();
+				i++;
+			}
+			itemCodeHolder++;
+		} else if (newMedia.getClass().getSimpleName().equals("Game")) {
+			int i = 0;
+			itemCodeHolder = 0;
+			while (i < catalog.size()) {
+				itemCodeHolder = catalog.get(i).getItemCode();
+				i++;
+			}
+			itemCodeHolder++;
+		}
+		newMedia.setItemCode(itemCodeHolder);
+		catalog.add(newMedia);
 	}
 }
