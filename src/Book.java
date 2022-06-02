@@ -3,6 +3,16 @@ import java.util.ArrayList;
 public class Book extends Media {
 	private ArrayList<String> author;
 
+	public Book(String title, ArrayList<String> author, String releaseDate, String genre, int itemCode) {
+		setTitle(title);
+		setAuthor(author);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setCondition(100);
+		setStatus("On Shelf");
+		setItemCode(itemCode);
+	}
+	
 	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
 		setTitle(title);
 		setAuthor(author);

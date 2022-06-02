@@ -21,6 +21,18 @@ public class Movie extends Media{
 	}
 	
 	//constructors
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre, int itemCode) {
+		this.director = director;
+		this.runTime = runTime;
+		setTitle(title);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setStatus("On Shelf");
+		setCondition(100);
+		setDueDate(0);
+		setItemCode(itemCode);
+	}
+
 	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
 		this.director = director;
 		this.runTime = runTime;
@@ -30,28 +42,24 @@ public class Movie extends Media{
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
+		
 	}
-	
 	//methods
 	@Override
 	public void checkOut() {
 		//get variable condition from super class so i can decrement it later
-		int condition = getCondition();
+		int cond = getCondition();
 		//false means on shelf
 		if (getStatus().equals("On Shelf")) {
 			setStatus("Checked Out");
 			//Decrement condition
-			setCondition(condition --);
+			setCondition(cond - 1);
 			//set due date
 			setDueDate(14);
 			//message
 			System.out.println("You've checked out: " + getTitle()
 					+ "\nIt is due in " + getDueDate() + " days");
-		} else if (getStatus().equals("Checked Out")) {
-			//message
-			System.out.println("This item is checked out, would you like to place a hold?");
-		}
-		else {
+		}else {
 			//message
 			System.out.println("That movie is currently checked out");
 		}
@@ -65,24 +73,48 @@ public class Movie extends Media{
 	@Override
 	public void renew() {
 		//get variables
-		int condition = getCondition();
+		int cond = getCondition();
 		//add 14 to dueDate and increment condition
-		setCondition(condition --);
+		setCondition(cond - 1);
 		setDueDate(getDueDate() + 14);
 	}
 	public void printDetails() {
 		//print details
 		String directorList = "";
-		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%n", getTitle(),
-				directorList, getReleaseDate(), getGenre(), getStatus());
+		if (getDirector().size() == 1) {
+			directorList += getDirector().get(0);
+		} else {
+			int i = 0;
+			while (i < getDirector().size() - 1) {
+				directorList += getDirector().get(i);
+				directorList += ", ";
+				i++;
+			}
+			directorList += getDirector().get(i);
+		}
+		System.out.printf("%s directed by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+				directorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
 	public String toString() {
-		//print smaller version of details
 		String directorList = "";
-		for (String director : getDirector()) {directorList += director; directorList += " ";}
-		return getTitle() + " by " + directorList;
+		if (getDirector().size() == 1) {
+			directorList += getDirector().get(0);
+		} else {
+			int i = 0;
+			while (i < getDirector().size() - 1) {
+				directorList += getDirector().get(i);
+				directorList += ", ";
+				i++;
+			}
+			directorList += getDirector().get(i);
+		}
+		return getTitle() + " by " + directorList;	
+	}
+
+	
+	public void addDirector(String dir) {
+		director.add(dir);
 	}
 }

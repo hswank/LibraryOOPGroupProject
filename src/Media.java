@@ -7,8 +7,15 @@ public abstract class Media {
 	private String status;
 	private int condition;
 	private int dueDate;
+	private int itemCode;
 	
 	//getters/setters
+	public int getItemCode() {
+		return itemCode;
+	}
+	public void setItemCode(int itemCode) {
+		this.itemCode = itemCode;
+	}
 	public String getTitle() {
 		return title;
 	}
