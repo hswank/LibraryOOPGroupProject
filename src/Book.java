@@ -12,6 +12,15 @@ public class Book extends Media {
 		setStatus("On Shelf");
 		setItemCode(itemCode);
 	}
+	
+	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
+		setTitle(title);
+		setAuthor(author);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setCondition(100);
+		setStatus("On Shelf");
+	}
 
 	public ArrayList<String> getAuthor() {
 		return author;

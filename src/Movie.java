@@ -33,6 +33,18 @@ public class Movie extends Media{
 		setItemCode(itemCode);
 	}
 	
+	public Movie (ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
+		this.director = director;
+		this.runTime = runTime;
+		setTitle(title);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setStatus("On Shelf");
+		setCondition(100);
+		setDueDate(0);
+		
+	}
+	
 	//methods
 	@Override
 	public void checkOut() {

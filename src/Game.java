@@ -17,6 +17,19 @@ public class Game extends Media {
 		setItemCode(itemCode);
 	
 	}
+	
+public Game(String publisher, String console, String title, String releaseDate, String genre) {
+		
+		this.publisher = publisher;
+		this.console = console;
+		setTitle(title);
+		setReleaseDate(releaseDate);
+		setGenre(genre);
+		setStatus("On Shelf");
+		setCondition(100);
+		setDueDate(0);
+	
+	}
 
 	public String getPublisher() {
 		return publisher;

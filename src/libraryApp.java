@@ -9,6 +9,7 @@ public class libraryApp {
 	public static void main(String[] args) {
 		
 		int userMainMenuSelection;
+		boolean continueProgram = true;
 		
 		//data ArrayList
 		ArrayList<Media> catalog = new ArrayList<>();
@@ -28,6 +29,7 @@ public class libraryApp {
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996","Platformer", 303));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004","MMO RPG", 304));
 		
+		while(continueProgram) {
 		System.out.println("Welcome to the Grand Circus Library!");
 		printMenu();
 		userMainMenuSelection = scnr.nextInt();
@@ -44,13 +46,30 @@ public class libraryApp {
 				break;
 		case 5: renewItemSelector(catalog);
 				break;
-		case 6: break;
+		case 6: donateMenu();
+				System.out.print("Selection: ");
+				int userSelection = scnr.nextInt();
+				switch(userSelection) {
+				case 1: catalog.add(donateBook());
+						break;
+				case 2: catalog.add(donateMovie());
+						break;
+				case 3: catalog.add(donateGame());
+						break;
+				}
 		case 7: scnr.close();
 				System.exit(0);
 		}
+		}
 		
+	}
+	
+	public static void donateMenu() {
 		
-		
+		System.out.println("Please choose what type of media you'd like to donate: ");
+		System.out.println("1. Book");
+		System.out.println("2. Movie");
+		System.out.println("3. Game");
 		
 	}
 	
@@ -194,20 +213,71 @@ public class libraryApp {
 		}
 		return catalog;
 	}
-/*	
-	public static Book donateBook(String title, ArrayList<String> author, String releaseDate, String genre) {
-		Book b = new Book(title, author, releaseDate, genre,);
+	
+	public static Book donateBook() {
+		
+		System.out.print("Please enter the title: ");
+		String bookTitle = scnr.nextLine();
+		scnr.nextLine();
+		System.out.print("Please enter the author: ");
+		String author = scnr.nextLine();
+		scnr.nextLine();
+		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
+		String releaseDate = scnr.nextLine();
+		scnr.nextLine();
+		System.out.print("Please enter the genre of the book: ");
+		String genre = scnr.nextLine();
+		System.out.println("Thank you! " + bookTitle + " has been added to the library catalog!");
+		
+		ArrayList<String> authors = new ArrayList<>(Arrays.asList(author));
+		
+		Book b = new Book(bookTitle, authors, releaseDate, genre);
+		b.printDetails();
 		return b;
 	}
 	
-	public static Game donateGame(String pub, String console, String title, String releaseDate, String genre) {
-		Game g = new Game(pub, console, title, releaseDate, genre);
+	public static Game donateGame() {
+		
+		System.out.print("Please enter the title: ");
+		String gameTitle = scnr.nextLine();
+		scnr.next();
+		System.out.print("Please enter the publisher: ");
+		String publisher = scnr.nextLine();
+		scnr.next();
+		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
+		String releaseDate = scnr.nextLine();
+		scnr.nextLine();
+		System.out.print("Please enter the genre of the game: ");
+		String genre = scnr.nextLine();
+		System.out.print("Please enter the console: ");
+		String console = scnr.nextLine();
+		scnr.nextLine();
+		
+		Game g = new Game(publisher, console, gameTitle, releaseDate, genre);
 		return g;
 	}
 	
-	public static Movie donateMovie(ArrayList<String> director, int runTime, String title, String releaseDate, String genre) {
-		Movie m = new Movie(director, runTime, title, releaseDate, genre);
+	public static Movie donateMovie() {
+		
+		System.out.print("Please enter the title: ");
+		String movieTitle = scnr.nextLine();
+		scnr.next();
+		System.out.print("Please enter the director: ");
+		String director = scnr.nextLine();
+		scnr.next();
+		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
+		String releaseDate = scnr.nextLine();
+		scnr.nextLine();
+		System.out.print("Please enter the genre of the movie: ");
+		String genre = scnr.nextLine();
+		System.out.print("Please enter the run time of the movie: ");
+		int runTime = scnr.nextInt();
+		scnr.nextLine();
+		
+		ArrayList<String> directors = new ArrayList<>(Arrays.asList(director));
+		
+		Movie m = new Movie(directors, runTime, movieTitle, releaseDate, genre);
 		return m;
 	}
-*/
+
 }
