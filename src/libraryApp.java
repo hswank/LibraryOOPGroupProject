@@ -56,7 +56,8 @@ public class libraryApp {
 						break;
 				case 3: catalog.add(donateGame());
 						break;
-				}	 
+				}
+				break;
 		case 7: System.out.println("Thank you for using our library app!");
 				System.exit(0);
 		}
@@ -237,6 +238,7 @@ public class libraryApp {
 		System.out.println("Thank you! " + gameTitle + " has been added to the library catalog!");
 		
 		Game g = new Game(publisher, console, gameTitle, releaseDate, genre);
+		g.printDetails();
 		return g;
 	}
 	
@@ -252,6 +254,7 @@ public class libraryApp {
 		ArrayList<String> directors = new ArrayList<>(Arrays.asList(director));
 		
 		Movie m = new Movie(directors, runTime, movieTitle, releaseDate, genre);
+		m.printDetails();
 		return m;
 	}
 }
