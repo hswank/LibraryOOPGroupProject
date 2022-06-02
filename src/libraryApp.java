@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class libraryApp {
 	
-	static Scanner scnr = new Scanner(System.in);
+	//global instance of input class
+	public static UserInput in = new UserInput();
 	
 	public static void main(String[] args) {
 		
@@ -33,7 +33,7 @@ public class libraryApp {
 		System.out.println("Welcome to the Grand Circus Library!");
 		
 		printMenu();
-		userMainMenuSelection = scnr.nextInt();
+		userMainMenuSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 7);
 		
 		switch(userMainMenuSelection) {
 		
@@ -48,8 +48,7 @@ public class libraryApp {
 		case 5: renewItemSelector(catalog);
 				break;
 		case 6: donateMenu();
-				System.out.print("Selection: ");
-				int userSelection = scnr.nextInt();
+				int userSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
 				switch(userSelection) {
 				case 1: catalog.add(donateBook());
 						break;
@@ -57,8 +56,8 @@ public class libraryApp {
 						break;
 				case 3: catalog.add(donateGame());
 						break;
-				}
-		case 7: scnr.close();
+				}	 
+		case 7: System.out.println("Thank you for using our library app!");
 				System.exit(0);
 		}
 	}
@@ -78,7 +77,7 @@ public class libraryApp {
 		int userRenewSelection;
 		
 		System.out.println("Please enter the item code for the media you wish to renew: ");
-		userRenewSelection = scnr.nextInt();
+		userRenewSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
 		
 		for(Media content : catalog) {
 			if (content.getItemCode() == userRenewSelection) {
@@ -93,7 +92,7 @@ public class libraryApp {
 		int userCheckOutSelection;
 		
 		System.out.print("Please enter the item code for the media you wish to check out: ");
-		userCheckOutSelection = scnr.nextInt();
+		userCheckOutSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
 		
 		for(Media content : catalog) {
 			if (content.getItemCode() == userCheckOutSelection) {
@@ -108,7 +107,7 @@ public class libraryApp {
 		int userCheckInSelection;
 		
 		System.out.println("Please enter the item code for the media you wish to check in: ");
-		userCheckInSelection = scnr.nextInt();
+		userCheckInSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
 		
 		for(Media content : catalog) {
 			if (content.getItemCode() == userCheckInSelection) {
@@ -130,7 +129,6 @@ public class libraryApp {
 		System.out.println("5. Renew Media");
 		System.out.println("6. Donate Media");
 		System.out.println("7. Exit");
-		System.out.print("Selection: ");
 	}
 	
 	public static void searchByMenu() {
@@ -216,17 +214,10 @@ public class libraryApp {
 	
 	public static Book donateBook() {
 		
-		System.out.print("Please enter the title: ");
-		String bookTitle = scnr.nextLine();
-		scnr.nextLine();
-		System.out.print("Please enter the author: ");
-		String author = scnr.nextLine();
-		scnr.nextLine();
-		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
-		String releaseDate = scnr.nextLine();
-		scnr.nextLine();
-		System.out.print("Please enter the genre of the book: ");
-		String genre = scnr.nextLine();
+		String bookTitle = in.readRandom("Please enter the title: ");
+		String author = in.readRandom("Please enter the author: ");
+		String releaseDate = in.readRandom("Please enter the release date (year: 19xx/2xxx): ");
+		String genre = in.readRandom("Please enter the genre of the book: ");
 		System.out.println("Thank you! " + bookTitle + " has been added to the library catalog!");
 		
 		ArrayList<String> authors = new ArrayList<>(Arrays.asList(author));
@@ -238,20 +229,12 @@ public class libraryApp {
 	
 	public static Game donateGame() {
 		
-		System.out.print("Please enter the title: ");
-		String gameTitle = scnr.nextLine();
-		scnr.next();
-		System.out.print("Please enter the publisher: ");
-		String publisher = scnr.nextLine();
-		scnr.next();
-		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
-		String releaseDate = scnr.nextLine();
-		scnr.nextLine();
-		System.out.print("Please enter the genre of the game: ");
-		String genre = scnr.nextLine();
-		System.out.print("Please enter the console: ");
-		String console = scnr.nextLine();
-		scnr.nextLine();
+		String gameTitle = in.readRandom("Please enter the title: ");
+		String publisher = in.readRandom("Please enter the publisher: ");
+		String releaseDate = in.readRandom("Please enter the release date (year: 19xx/2xxx): ");
+		String genre = in.readRandom("Please enter the genre of the game: ");
+		String console = in.readRandom("Please enter the console: ");
+		System.out.println("Thank you! " + gameTitle + " has been added to the library catalog!");
 		
 		Game g = new Game(publisher, console, gameTitle, releaseDate, genre);
 		return g;
@@ -259,20 +242,12 @@ public class libraryApp {
 	
 	public static Movie donateMovie() {
 		
-		System.out.print("Please enter the title: ");
-		String movieTitle = scnr.nextLine();
-		scnr.next();
-		System.out.print("Please enter the director: ");
-		String director = scnr.nextLine();
-		scnr.next();
-		System.out.print("Please enter the release date (year: 19xx/2xxx): ");
-		String releaseDate = scnr.nextLine();
-		scnr.nextLine();
-		System.out.print("Please enter the genre of the movie: ");
-		String genre = scnr.nextLine();
-		System.out.print("Please enter the run time of the movie: ");
-		int runTime = scnr.nextInt();
-		scnr.nextLine();
+		String movieTitle = in.readRandom("Please enter the title: ");
+		String director = in.readRandom("Please enter the director: ");
+		String releaseDate = in.readRandom("Please enter the release date (year: 19xx/2xxx): ");
+		String genre = in.readRandom("Please enter the genre of the movie: ");
+		int runTime = in.readInteger("Please enter the run time of the movie: ", "Thats not a valid input!");
+		System.out.println("Thank you! " + movieTitle + " has been added to the library catalog!");
 		
 		ArrayList<String> directors = new ArrayList<>(Arrays.asList(director));
 		

@@ -110,7 +110,7 @@ public class Movie extends Media{
 			}
 			directorList += getDirector().get(i);
 		}
-		return getTitle() + " by " + directorList;	
+		return getItemCode() + ": " + getTitle() + " by " + directorList;	
 	}
 
 	

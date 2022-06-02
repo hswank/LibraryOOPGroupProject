@@ -26,6 +26,30 @@ public class UserInput {
 		return inputReturn;
 	}
 	
+	public String readRandom (String promptMsg) {
+		System.out.println(promptMsg);
+		String inputReturn = scnr.nextLine();
+		return inputReturn;
+	}
+	
+	public int readInteger (String promptMsg, String errorMsg) {
+		int num = 0;
+		String strInput;
+		boolean valid = false;
+		
+		while (valid == false) {
+			System.out.println(promptMsg);
+			strInput = scnr.nextLine();
+			try {
+				num = Integer.parseInt(strInput);
+				valid = true;
+			} catch(NumberFormatException e) {
+				System.out.println(errorMsg);
+			}
+		}
+		return num;
+	}
+	
 	public int readInteger (String promptMsg, String errorMsg, int low, int hi) {
 		int num = 0;
 		String strInput;
