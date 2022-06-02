@@ -38,8 +38,8 @@ public class Book extends Media {
 			setCondition(condition);
 			setDueDate(14);
 			setStatus("Checked Out");
-		} else if (getStatus().equals("Checked out")) {
-			System.out.println("This item has been checked out already.  Would you like to place a hold?");
+		} else {
+			System.out.println("This item has been checked out already.");
 		}
 
 
