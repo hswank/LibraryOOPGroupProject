@@ -29,14 +29,10 @@ public class libraryApp {
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996","Platformer", 303));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004","MMO RPG", 304));
 		
-		Game poop = new Game("Sony", "poop", "poop games", "2023", "fun");
-		addToCatalog(poop, catalog);
-		for (Media item: catalog) {
-			System.out.println(item.toString());
-		}
+		
 		
 		while(continueProgram) {
-		System.out.println("Welcome to the Grand Circus Library!");
+		System.out.println("Welcome to the GC Charity Library!");
 		printMenu();
 		userMainMenuSelection = scnr.nextInt();
 		
@@ -291,7 +287,9 @@ public class libraryApp {
 			int i = 0;
 			itemCodeHolder = 0;
 			while (i < catalog.size()) {
-				itemCodeHolder = catalog.get(i).getItemCode();
+				if (catalog.get(i).getClass().getSimpleName().equals("Book")) {
+					itemCodeHolder = catalog.get(i).getItemCode();
+				}
 				i++;
 			}
 			itemCodeHolder++;
@@ -299,7 +297,9 @@ public class libraryApp {
 			int i = 0;
 			itemCodeHolder = 0;
 			while (i < catalog.size()) {
-				itemCodeHolder = catalog.get(i).getItemCode();
+				if (catalog.get(i).getClass().getSimpleName().equals("Movie")) {
+					itemCodeHolder = catalog.get(i).getItemCode();
+				}
 				i++;
 			}
 			itemCodeHolder++;
@@ -307,7 +307,9 @@ public class libraryApp {
 			int i = 0;
 			itemCodeHolder = 0;
 			while (i < catalog.size()) {
-				itemCodeHolder = catalog.get(i).getItemCode();
+				if (catalog.get(i).getClass().getSimpleName().equals("Game")) {
+					itemCodeHolder = catalog.get(i).getItemCode();
+				}
 				i++;
 			}
 			itemCodeHolder++;
