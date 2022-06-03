@@ -23,7 +23,7 @@ public class libraryApp {
 		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945", "Dystopian Fiction", 102));
 		catalog.add(new Book("A Game Of Thrones", new ArrayList<String>(Arrays.asList("George R. R. Martin")), "1996", "Fantasy", 103));
 		catalog.add(new Book("Grant", new ArrayList<String>(Arrays.asList("Ron Chernow")), "2017", "Biography", 104));
-		//video games
+		//video games        
 		catalog.add(new Game("Sony", "PlayStation", "Crash Bandicoot", "1996","Platformer", 301));
 		catalog.add(new Game("Microsoft", "Xbox", "Halo", "2001","First Person Shooter", 302));
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996","Platformer", 303));
@@ -58,6 +58,7 @@ public class libraryApp {
 				case 3: catalog.add(donateGame());
 						break;
 				}
+				break;
 		case 7: scnr.close();
 				System.exit(0);
 		}

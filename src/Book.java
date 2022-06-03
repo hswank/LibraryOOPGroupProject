@@ -86,7 +86,7 @@ public class Book extends Media {
 		if (getAuthor().size() == 1) {
 			authorList += getAuthor().get(0);
 		} else {
-			int i = 0;
+			int i = 0;            
 			while (i < getAuthor().size() - 1) {
 				authorList += getAuthor().get(i);
 				authorList += ", ";
