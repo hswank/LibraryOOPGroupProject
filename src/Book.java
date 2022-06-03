@@ -12,7 +12,7 @@ public class Book extends Media {
 		setStatus("On Shelf");
 		setItemCode(itemCode);
 	}
-	
+
 	public Book(String title, ArrayList<String> author, String releaseDate, String genre) {
 		setTitle(title);
 		setAuthor(author);
@@ -29,15 +29,20 @@ public class Book extends Media {
 	public void setAuthor(ArrayList<String> author) {
 		this.author = author;
 	}
-	
+
 	public void addAuthor(String authorName) {
 		author.add(authorName);
 	}
 
 	@Override
 	public void checkIn() {
-		setStatus("On Shelf");
-		setDueDate(0);
+		if (getStatus().equals("Checked Out")) {
+			setStatus("On Shelf");
+			setDueDate(0);
+			System.out.println("You've checked in: " + getTitle() + ".");
+		} else {
+			System.out.println("This book is already checked in.");
+		}
 	}
 
 	@Override
@@ -48,36 +53,43 @@ public class Book extends Media {
 			setCondition(condition);
 			setDueDate(14);
 			setStatus("Checked Out");
+			System.out.println("You've checked out: " + getTitle() + ".");
+			System.out.println("This book is due in " + getDueDate() + " days.");
 		} else {
 			System.out.println("This item has been checked out already.");
 		}
-
 
 	}
 
 	@Override
 	public void renew() {
-		setCondition(getCondition() - 5);
-		int dueDate = getDueDate();
-		dueDate = dueDate + 14;
-		setDueDate(dueDate);
+		if (getStatus().equals("Checked Out")) {
+			setCondition(getCondition() - 5);
+			int dueDate = getDueDate();
+			dueDate = dueDate + 14;
+			setDueDate(dueDate);
+			System.out.println("You've renewed " + getTitle() + ".");
+			System.out.println("This book is due in " + getDueDate() + " days.");
+		} else {
+			System.out.println("This item hasn't been checked out yet.");
+		}
 	}
 
 	public void printDetails() {
 		String authorList = "";
-			if (getAuthor().size() == 1) {
-				authorList += getAuthor().get(0);
-			} else {
-				int i = 0;
-				while (i < getAuthor().size() - 1) {
-					authorList += getAuthor().get(i);
-					authorList += ", ";
-					i++;
-				}
+		if (getAuthor().size() == 1) {
+			authorList += getAuthor().get(0);
+		} else {
+			int i = 0;
+			while (i < getAuthor().size() - 1) {
 				authorList += getAuthor().get(i);
+				authorList += ", ";
+				i++;
 			}
-		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
-				authorList, getReleaseDate(), getGenre(), getStatus(), getItemCode());
+			authorList += getAuthor().get(i);
+		}
+		System.out.printf("%s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d%n", getTitle(), authorList,
+				getReleaseDate(), getGenre(), getStatus(), getItemCode());
 	}
 
 	@Override
@@ -86,7 +98,7 @@ public class Book extends Media {
 		if (getAuthor().size() == 1) {
 			authorList += getAuthor().get(0);
 		} else {
-			int i = 0;
+			int i = 0;            
 			while (i < getAuthor().size() - 1) {
 				authorList += getAuthor().get(i);
 				authorList += ", ";

@@ -4,7 +4,7 @@ public class Game extends Media {
 	String console;
 
 	public Game(String publisher, String console, String title, String releaseDate, String genre, int itemCode) {
-		
+
 		this.publisher = publisher;
 		this.console = console;
 		setTitle(title);
@@ -14,7 +14,7 @@ public class Game extends Media {
 		setCondition(100);
 		setDueDate(0);
 		setItemCode(itemCode);
-	
+
 	}
 
 	public Game(String publisher, String console, String title, String releaseDate, String genre) {
@@ -26,9 +26,9 @@ public class Game extends Media {
 		setStatus("On Shelf");
 		setCondition(100);
 		setDueDate(0);
-	
+
 	}
-	
+
 	public String getPublisher() {
 		return publisher;
 	}
@@ -47,10 +47,13 @@ public class Game extends Media {
 
 	@Override
 	public void checkIn() {
-		
-		setStatus("On Shelf");
-		setDueDate(0);			
-
+		if (getStatus().equals("Checked Out")) {
+			setStatus("On Shelf");
+			setDueDate(0);
+			System.out.println("You've checked in: " + getTitle() + ".");
+		} else {
+			System.out.println("This video game is already checked in.");
+		}
 	}
 
 	@Override
@@ -60,35 +63,39 @@ public class Game extends Media {
 			setStatus("Checked Out");
 			setCondition(getCondition() - 2);
 			setDueDate(14);
-			
-		System.out.println("You've checked out: " + getTitle() + ".");
-		System.out.println("This videogame is due in " + getDueDate() + " days.");
-		} else if(getStatus().equals("Checked Out")) {
-			System.out.println("This video game is checked out, would you like to place a hold?");
+
+			System.out.println("You've checked out: " + getTitle() + ".");
+			System.out.println("This videogame is due in " + getDueDate() + " days.");
 		} else {
-			System.out.println("This video game is currently checked out");
+			System.out.println("This video game is already checked out.");
 		}
-		
+
 	}
 
 	@Override
 	public void renew() {
-		
-		setCondition(getCondition() - 2);
-		setDueDate(getDueDate() + 14);
-		
+		if (getStatus().equals("Checked Out")) {
+			setCondition(getCondition() - 2);
+			int dueDate = getDueDate();
+			dueDate = dueDate + 14;
+			setDueDate(dueDate);
+			System.out.println("You've renewed " + getTitle() + ".");
+			System.out.println("This video game is due in " + getDueDate() + " days.");
+		} else {
+			System.out.println("This item hasn't been checked out yet.");
+		}
 	}
-	
+
 	public void printDetails() {
-		//print details
-		System.out.printf("%s on %s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d", getTitle(),
+		// print details
+		System.out.printf("%s on %s by %s%nReleased: %s%nGenre: %s%nStatus: %s%nItem Code: %d%n", getTitle(),
 				getConsole(), getPublisher(), getReleaseDate(), getGenre(), getStatus(), getItemCode());
 
 	}
-	
+
 	@Override
 	public String toString() {
 		return getItemCode() + ": " + getTitle() + " for " + getConsole() + ".";
 	}
-	
+
 }
