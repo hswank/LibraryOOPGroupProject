@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class libraryApp {
@@ -15,7 +15,7 @@ public class libraryApp {
 		ArrayList<Media> catalog = new ArrayList<>();
 		// books
 		catalog.add(new Book("Fear And Loathing In Las Vegas",new ArrayList<String>(Arrays.asList("Hunter S. Thompson")), "1976", "Fiction", 101));
-		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945","Dystopian Fiction", 102));
+		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945","Dystopian Fiction", 102));                                             
 		catalog.add(new Book("A Game Of Thrones", new ArrayList<String>(Arrays.asList("George R. R. Martin")), "1996","Fantasy", 103));
 		catalog.add(new Book("Grant", new ArrayList<String>(Arrays.asList("Ron Chernow")), "2017", "Biography", 104));
 		// movies
