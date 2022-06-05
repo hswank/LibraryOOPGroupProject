@@ -324,7 +324,7 @@ public class libraryApp {
 
 		String bookTitle = in.readRandom("Please enter the title: ");
 		String author = in.readRandom("Please enter the author: ");
-		String releaseDate = in.readRandom("Please enter the release date (year: 19xx/2xxx): ");
+		String releaseDate = in.readRandom("Please enter the release date (year: XXXX): ");
 		String genre = in.readRandom("Please enter the genre of the book: ");
 		System.out.println("Thank you! " + bookTitle + " has been added to the library catalog!");
 
