@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class libraryApp {
@@ -15,7 +15,7 @@ public class libraryApp {
 		ArrayList<Media> catalog = new ArrayList<>();
 		// books
 		catalog.add(new Book("Fear And Loathing In Las Vegas",new ArrayList<String>(Arrays.asList("Hunter S. Thompson")), "1976", "Fiction", 101));
-		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945","Dystopian Fiction", 102));
+		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945","Dystopian Fiction", 102));                                             
 		catalog.add(new Book("A Game Of Thrones", new ArrayList<String>(Arrays.asList("George R. R. Martin")), "1996","Fantasy", 103));
 		catalog.add(new Book("Grant", new ArrayList<String>(Arrays.asList("Ron Chernow")), "2017", "Biography", 104));
 		// movies
@@ -29,8 +29,9 @@ public class libraryApp {
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996", "Platformer", 303));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004", "MMO RPG", 304));
 
+		
 		while (continueProgram) {
-			System.out.println("Welcome to the GC Charity Library!");
+			System.out.println("Welcome to the GC Charity Library!\n");
 
 			printMenu();
 			userMainMenuSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 7);
@@ -57,55 +58,73 @@ public class libraryApp {
 				System.out.println();
 				break;
 			case 6:
-				donateMenu();
-				int userSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
-				switch (userSelection) {
-				case 1:
-					catalog.add(donateBook(catalog));
-					System.out.println();
-					break;
-				case 2:
-					catalog.add(donateMovie(catalog));
-					System.out.println();
-					break;
-				case 3:
-					catalog.add(donateGame(catalog));
-					System.out.println();
-					break;
-				}
+				donateMenu(catalog);
 				break;
 			case 7:
-				System.out.println();
-				System.out.println("Thank you for using our library app!");
+				System.out.println("\nThank you for using our library app!");
 				System.exit(0);
 			}
 		}
 
 	}
-
-	public static void donateMenu() {
-
-		System.out.println("Please choose what type of media you'd like to donate: ");
-		System.out.println("1. Book");
-		System.out.println("2. Movie");
-		System.out.println("3. Game");
+	
+	public static void printMenu() {
+		System.out.println("Please choose from the following options: ");
+		System.out.println("1. View Catalog");
+		System.out.println("2. Search Catalog");
+		System.out.println("3. Check Out Media");
+		System.out.println("4. Check In Media");
+		System.out.println("5. Renew Media");
+		System.out.println("6. Donate Media");
+		System.out.println("7. Exit");
 	}
-
-	public static void renewItemSelector(ArrayList<Media> catalog) {
-
-		int userRenewSelection;
-
-		System.out.println("Please enter the item code for the media you wish to renew: ");
-		userRenewSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
-
-		for (Media content : catalog) {
-			if (content.getItemCode() == userRenewSelection) {
-				content.renew();
-			}
+	
+	public static void printCatalogMenu(ArrayList<Media> catalog) {
+		System.out.println("1. View Full Catalog");
+		System.out.println("2. View Book Catalog");
+		System.out.println("3. View Movie Catalog");
+		System.out.println("4. View Game Catalog");
+		int input = in.readInteger("Selection: ", "Not a valid choice!", 1, 4);
+		switch (input) {
+		case 1:
+			printCatalog(catalog);
+			break;
+		case 2:
+			printCatalog(formatSeparator(catalog, "book"));
+			break;
+		case 3:
+			printCatalog(formatSeparator(catalog, "movie"));
+			break;
+		case 4:
+			printCatalog(formatSeparator(catalog, "game"));
+			break;
 		}
-
+		System.out.println();
 	}
 
+	public static void searchCatalogMenu(ArrayList<Media> catalog) {
+
+		System.out.println("1. Search Full Catalog");
+		System.out.println("2. Search Book Catalog");
+		System.out.println("3. Search Movie Catalog");
+		System.out.println("4. Search Game Catalog");
+		int input = in.readInteger("Selection: ", "That's not a valid selection!", 1, 4);
+		switch (input) {
+		case 1:
+			searchByMenu(catalog);
+			break;
+		case 2:
+			searchByMenu(formatSeparator(catalog, "book"));
+			break;
+		case 3:
+			searchByMenu(formatSeparator(catalog, "movie"));
+			break;
+		case 4:
+			searchByMenu(formatSeparator(catalog, "game"));
+			break;
+		}
+	}
+	
 	public static void checkOutItemSelector(ArrayList<Media> catalog) {
 
 		int userCheckOutSelection;
@@ -125,7 +144,7 @@ public class libraryApp {
 			}
 		}
 	}
-
+	
 	public static void checkInItemSelector(ArrayList<Media> catalog) {
 
 		int userCheckInSelection;
@@ -145,171 +164,85 @@ public class libraryApp {
 			}
 		}
 	}
+	
+	public static void renewItemSelector(ArrayList<Media> catalog) {
 
-	public static void printMenu() {
-		System.out.println("Please choose from the following options: ");
-		System.out.println("1. View Catalog");
-		System.out.println("2. Search Catalog");
-		System.out.println("3. Check Out Media");
-		System.out.println("4. Check In Media");
-		System.out.println("5. Renew Media");
-		System.out.println("6. Donate Media");
-		System.out.println("7. Exit");
+		int userRenewSelection;
+		boolean found = false;
+		while (found == false) {
+			System.out.println("Please enter the item code for the media you wish to renew: ");
+			userRenewSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
+	
+			for (Media content : catalog) {
+				if (content.getItemCode() == userRenewSelection) {
+					content.renew();
+					found = true;
+				}
+			}
+			if (found == false) {
+				System.out.println("Thats not a valid selection");
+			}
+		}
+	}
+	
+	public static void donateMenu(ArrayList<Media> catalog) {
+
+		System.out.println("Please choose what type of media you'd like to donate: ");
+		System.out.println("1. Book");
+		System.out.println("2. Movie");
+		System.out.println("3. Game");
+		
+		int userSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
+		switch (userSelection) {
+		case 1:
+			catalog.add(donateBook(catalog));
+			System.out.println();
+			break;
+		case 2:
+			catalog.add(donateMovie(catalog));
+			System.out.println();
+			break;
+		case 3:
+			catalog.add(donateGame(catalog));
+			System.out.println();
+			break;
+		}
 	}
 
-	public static void searchByMenu() {
+	public static void searchByMenu(ArrayList<Media> catalog) {
 		System.out.println("1. Search by Title");
 		System.out.println("2. Search by Creator");
 		System.out.println("3. Search by Genre");
-	}
-
-	public static void searchCatalogMenu(ArrayList<Media> catalog) {
-		ArrayList<Media> books = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 100 && catalog.get(i).getItemCode() < 200) {
-				books.add(catalog.get(i));
-			}
-		}
-		ArrayList<Media> movies = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 200 && catalog.get(i).getItemCode() < 300) {
-				movies.add(catalog.get(i));
-			}
-		}
-		ArrayList<Media> games = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 300 && catalog.get(i).getItemCode() < 400) {
-				games.add(catalog.get(i));
-			}
-		}
-
-		System.out.println("1. Search Full Catalog");
-		System.out.println("2. Search Book Catalog");
-		System.out.println("3. Search Movie Catalog");
-		System.out.println("4. Search Game Catalog");
-		int input = in.readInteger("Selection: ", "That's not a valid selection!", 1, 4);
-		switch (input) {
+		
+		int input2 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
+		switch (input2) {
 		case 1:
-			searchByMenu();
-			int input2 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
-			switch (input2) {
-			case 1:
-				String searchTitle = in.readRandom("Enter title to search: ");
-				searchByTitle(catalog, searchTitle);
-				break;
-			case 2:
-				String searchCreator = in.readRandom("Enter creator to search: ");
-				searchByCreator(searchCreator, catalog);
-				break;
-			case 3:
-				String searchGenre = in.readRandom("Enter genre to search: ");
-				searchByGenre(searchGenre, catalog);
-				break;
-			}
+			String searchTitle = in.readRandom("Enter title to search: ");
+			searchByTitle(searchTitle, catalog);
 			break;
 		case 2:
-			searchByMenu();
-			int input3 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
-			switch (input3) {
-			case 1:
-				String searchTitle = in.readRandom("Enter title to search: ");
-				searchByTitle(books, searchTitle);
-				break;
-			case 2:
-				String searchCreator = in.readRandom("Enter author to search: ");
-				searchByCreator(searchCreator, books);
-				break;
-			case 3:
-				String searchGenre = in.readRandom("Enter genre to search: ");
-				searchByGenre(searchGenre, books);
-				break;
-			}
+			String searchCreator = in.readRandom("Enter creator to search: ");
+			searchByCreator(searchCreator, catalog);
 			break;
 		case 3:
-			searchByMenu();
-			int input4 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
-			switch (input4) {
-			case 1:
-				String searchTitle = in.readRandom("Enter title to search: ");
-				searchByTitle(movies, searchTitle);
-				break;
-			case 2:
-				String searchCreator = in.readRandom("Enter director to search: ");
-				searchByCreator(searchCreator, movies);
-				break;
-			case 3:
-				String searchGenre = in.readRandom("Enter genre to search: ");
-				searchByGenre(searchGenre, movies);
-				break;
-			}
-			break;
-		case 4:
-			searchByMenu();
-			int input5 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
-			switch (input5) {
-			case 1:
-				String searchTitle = in.readRandom("Enter title to search: ");
-				searchByTitle(games, searchTitle);
-				break;
-			case 2:
-				String searchCreator = in.readRandom("Enter publisher to search: ");
-				searchByCreator(searchCreator, games);
-				break;
-			case 3:
-				String searchGenre = in.readRandom("Enter genre to search: ");
-				searchByGenre(searchGenre, games);
-				break;
-			}
+			String searchGenre = in.readRandom("Enter genre to search: ");
+			searchByGenre(searchGenre, catalog);
 			break;
 		}
 	}
 
-	public static void printCatalogMenu(ArrayList<Media> catalog) {
-		System.out.println("1. View Full Catalog");
-		System.out.println("2. View Book Catalog");
-		System.out.println("3. View Movie Catalog");
-		System.out.println("4. View Game Catalog");
-		int input = in.readInteger("Selection: ", "Not a valid choice!", 1, 4);
-		switch (input) {
-		case 1:
-			for (Media item : catalog) {
-				System.out.println(item.toString());
-			}
-			break;
-		case 2:
-			for (Media item : catalog) {
-				if (item.getClass().getSimpleName().equals("Book")) {
-					System.out.println(item.toString());
-				}
-			}
-			break;
-		case 3:
-			for (Media item : catalog) {
-				if (item.getClass().getSimpleName().equals("Movie")) {
-					System.out.println(item.toString());
-				}
-			}
-			break;
-		case 4:
-			for (Media item : catalog) {
-				if (item.getClass().getSimpleName().equals("Game")) {
-					System.out.println(item.toString());
-				}
-			}
-			break;
-		}
-		System.out.println();
-	}
-
-	
 	 public static void printCatalog(ArrayList<Media> catalog) {
-	 System.out.printf("%-35s%-20s%n", "Title", "Format");
-	 System.out.println("--------------------------------------------"); for
-	 (Media item : catalog) { System.out.printf("%-35s%-20s%n", item.getTitle(),
-	 item.getClass().getSimpleName()); } }
-	
+		 System.out.printf("%n%-12s%-35s%-20s%n", "Item Code", "Title", "Format");
+		 System.out.println("---------   -------------------------------    ------");
+		 for (Media item : catalog) {
+			 System.out.printf("%-12d%-35s%-20s%n", item.getItemCode(), item.getTitle(), item.getClass().getSimpleName());
+		 } 
+		 System.out.println();
+	 }
+	 
 	public static void searchByGenre(String genre, ArrayList<Media> catalog) {
 		boolean found = false;
+		System.out.println("\nResults:\n");
 		while (found == false) {
 			for (Media content : catalog) {
 				if (content.getGenre().toLowerCase().contains(genre.toLowerCase())) {
@@ -324,8 +257,9 @@ public class libraryApp {
 		}
 	}
 
-	public static void searchByTitle(ArrayList<Media> catalog, String title) {
+	public static void searchByTitle(String title, ArrayList<Media> catalog) {
 		boolean found = false;
+		System.out.println("\nResults:\n");
 		while (found == false) {
 			for (Media content : catalog) {
 				if (content.getTitle().toLowerCase().contains(title.toLowerCase())) {
@@ -342,6 +276,7 @@ public class libraryApp {
 
 	public static void searchByCreator(String creator, ArrayList<Media> catalog) {
 		boolean found = false;
+		System.out.println("\nResults:\n");
 		while (found == false) {
 			for (Media item : catalog) {
 				if (item instanceof Movie) {
@@ -389,7 +324,7 @@ public class libraryApp {
 
 		String bookTitle = in.readRandom("Please enter the title: ");
 		String author = in.readRandom("Please enter the author: ");
-		String releaseDate = in.readRandom("Please enter the release date (year: 19xx/2xxx): ");
+		String releaseDate = in.readRandom("Please enter the release date (year: XXXX): ");
 		String genre = in.readRandom("Please enter the genre of the book: ");
 		System.out.println("Thank you! " + bookTitle + " has been added to the library catalog!");
 
@@ -439,36 +374,52 @@ public class libraryApp {
 	public static int addItemCode(Media newMedia, ArrayList<Media> catalog) {
 		int itemCodeHolder = 0;
 		if (newMedia.getClass().getSimpleName().equals("Book")) {
-			int i = 0;
-			itemCodeHolder = 0;
-			while (i < catalog.size()) {
-				if (catalog.get(i).getClass().getSimpleName().equals("Book")) {
-					itemCodeHolder = catalog.get(i).getItemCode();
-				}
-				i++;
-			}
-			itemCodeHolder++;
+			itemCodeHolder = findNewItemCode(catalog, "book");
 		} else if (newMedia.getClass().getSimpleName().equals("Movie")) {
-			int i = 0;
-			itemCodeHolder = 0;
-			while (i < catalog.size()) {
-				if (catalog.get(i).getClass().getSimpleName().equals("Movie")) {
-					itemCodeHolder = catalog.get(i).getItemCode();
-				}
-				i++;
-			}
-			itemCodeHolder++;
+			itemCodeHolder = findNewItemCode(catalog, "movie");
 		} else if (newMedia.getClass().getSimpleName().equals("Game")) {
-			int i = 0;
-			itemCodeHolder = 0;
-			while (i < catalog.size()) {
-				if (catalog.get(i).getClass().getSimpleName().equals("Game")) {
-					itemCodeHolder = catalog.get(i).getItemCode();
-				}
-				i++;
-			}
-			itemCodeHolder++;
+			itemCodeHolder = findNewItemCode(catalog, "game");
 		}
 		return itemCodeHolder;
+	}
+	
+	public static int findNewItemCode(ArrayList<Media> catalog, String format) {
+		int itemCodeHolder = 0;
+		for (int i = 0; i < catalog.size(); i++) {
+			if (catalog.get(i).getClass().getSimpleName().equalsIgnoreCase(format)) {
+				itemCodeHolder = catalog.get(i).getItemCode();
+			}
+		}
+		itemCodeHolder++;
+		return itemCodeHolder;
+	}
+
+	public static ArrayList<Media> formatSeparator(ArrayList<Media> catalog, String format) {
+		if (format.equalsIgnoreCase("book")) {
+		ArrayList<Media> books = new ArrayList<Media>();
+		for (int i = 0; i < catalog.size(); i++) {
+			if (catalog.get(i).getItemCode() > 100 && catalog.get(i).getItemCode() < 200) {
+				books.add(catalog.get(i));
+			}
+		}
+		return books;
+		} else if (format.equalsIgnoreCase("movie")) {
+		ArrayList<Media> movies = new ArrayList<Media>();
+		for (int i = 0; i < catalog.size(); i++) {
+			if (catalog.get(i).getItemCode() > 200 && catalog.get(i).getItemCode() < 300) {
+				movies.add(catalog.get(i));
+			}
+		}
+		return movies;
+		} else {
+		
+		ArrayList<Media> games = new ArrayList<Media>();
+		for (int i = 0; i < catalog.size(); i++) {
+			if (catalog.get(i).getItemCode() > 300 && catalog.get(i).getItemCode() < 400) {
+				games.add(catalog.get(i));
+			}
+		}
+		return games;
+		}
 	}
 }
