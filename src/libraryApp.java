@@ -1,4 +1,4 @@
- import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class libraryApp {
@@ -14,22 +14,28 @@ public class libraryApp {
 		// data ArrayList
 		ArrayList<Media> catalog = new ArrayList<>();
 		// books
-		catalog.add(new Book("Fear And Loathing In Las Vegas",new ArrayList<String>(Arrays.asList("Hunter S. Thompson")), "1976", "Fiction", 101));
-		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945","Dystopian Fiction", 102));                                             
-		catalog.add(new Book("A Game Of Thrones", new ArrayList<String>(Arrays.asList("George R. R. Martin")), "1996","Fantasy", 103));
+		catalog.add(new Book("Fear And Loathing In Las Vegas",
+				new ArrayList<String>(Arrays.asList("Hunter S. Thompson")), "1976", "Fiction", 101));
+		catalog.add(new Book("Animal Farm", new ArrayList<String>(Arrays.asList("George Orwell")), "1945",
+				"Dystopian Fiction", 102));
+		catalog.add(new Book("A Game Of Thrones", new ArrayList<String>(Arrays.asList("George R. R. Martin")), "1996",
+				"Fantasy", 103));
 		catalog.add(new Book("Grant", new ArrayList<String>(Arrays.asList("Ron Chernow")), "2017", "Biography", 104));
 		// movies
-		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Steven Spielberg")), 124, "Jaws", "1975", "Thriller", 201));
-		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("George Lucas")), 121, "Star Wars: A New Hope", "1977", "Sci-Fi", 202));
-		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Peter Jackson")), 169, "The Hobbit", "2012", "Fantasy", 203));
-		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Martin Scorsese")), 180, "The Wolf Of Wallstreet", "2013", "Drama", 204));
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Steven Spielberg")), 124, "Jaws", "1975", "Thriller",
+				201));
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("George Lucas")), 121, "Star Wars: A New Hope",
+				"1977", "Sci-Fi", 202));
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Peter Jackson")), 169, "The Hobbit", "2012",
+				"Fantasy", 203));
+		catalog.add(new Movie(new ArrayList<String>(Arrays.asList("Martin Scorsese")), 180, "The Wolf Of Wallstreet",
+				"2013", "Drama", 204));
 		// video games
 		catalog.add(new Game("Sony", "PlayStation", "Crash Bandicoot", "1996", "Platformer", 301));
 		catalog.add(new Game("Microsoft", "Xbox", "Halo", "2001", "First Person Shooter", 302));
 		catalog.add(new Game("Nintendo", "N64", "Super Mario 64", "1996", "Platformer", 303));
 		catalog.add(new Game("Blizzard", "PC", "World of Warcraft", "2004", "MMO RPG", 304));
 
-		
 		while (continueProgram) {
 			System.out.println("Welcome to the GC Charity Library!\n");
 
@@ -67,7 +73,7 @@ public class libraryApp {
 		}
 
 	}
-	
+
 	public static void printMenu() {
 		System.out.println("Please choose from the following options: ");
 		System.out.println("1. View Catalog");
@@ -78,7 +84,7 @@ public class libraryApp {
 		System.out.println("6. Donate Media");
 		System.out.println("7. Exit");
 	}
-	
+
 	public static void printCatalogMenu(ArrayList<Media> catalog) {
 		System.out.println("1. View Full Catalog");
 		System.out.println("2. View Book Catalog");
@@ -124,7 +130,7 @@ public class libraryApp {
 			break;
 		}
 	}
-	
+
 	public static void checkOutItemSelector(ArrayList<Media> catalog) {
 
 		int userCheckOutSelection;
@@ -144,7 +150,7 @@ public class libraryApp {
 			}
 		}
 	}
-	
+
 	public static void checkInItemSelector(ArrayList<Media> catalog) {
 
 		int userCheckInSelection;
@@ -155,8 +161,13 @@ public class libraryApp {
 
 			for (Media content : catalog) {
 				if (content.getItemCode() == userCheckInSelection) {
-					content.checkIn();
-					found = true;
+					if (content.getCondition() <= 0) {
+						recycle(catalog, content);
+						System.out.println("This item's condition is poor, it will be recycled.");
+					} else {
+						content.checkIn();
+						found = true;
+					}
 				}
 			}
 			if (found == false) {
@@ -164,7 +175,7 @@ public class libraryApp {
 			}
 		}
 	}
-	
+
 	public static void renewItemSelector(ArrayList<Media> catalog) {
 
 		int userRenewSelection;
@@ -172,7 +183,7 @@ public class libraryApp {
 		while (found == false) {
 			System.out.println("Please enter the item code for the media you wish to renew: ");
 			userRenewSelection = in.readInteger("Selection: ", "That's not a valid selection!", 0, 399);
-	
+
 			for (Media content : catalog) {
 				if (content.getItemCode() == userRenewSelection) {
 					content.renew();
@@ -184,14 +195,14 @@ public class libraryApp {
 			}
 		}
 	}
-	
+
 	public static void donateMenu(ArrayList<Media> catalog) {
 
 		System.out.println("Please choose what type of media you'd like to donate: ");
 		System.out.println("1. Book");
 		System.out.println("2. Movie");
 		System.out.println("3. Game");
-		
+
 		int userSelection = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
 		switch (userSelection) {
 		case 1:
@@ -213,7 +224,7 @@ public class libraryApp {
 		System.out.println("1. Search by Title");
 		System.out.println("2. Search by Creator");
 		System.out.println("3. Search by Genre");
-		
+
 		int input2 = in.readInteger("Selection: ", "That's not a valid selection!", 1, 3);
 		switch (input2) {
 		case 1:
@@ -231,15 +242,16 @@ public class libraryApp {
 		}
 	}
 
-	 public static void printCatalog(ArrayList<Media> catalog) {
-		 System.out.printf("%n%-12s%-35s%-20s%n", "Item Code", "Title", "Format");
-		 System.out.println("---------   -------------------------------    ------");
-		 for (Media item : catalog) {
-			 System.out.printf("%-12d%-35s%-20s%n", item.getItemCode(), item.getTitle(), item.getClass().getSimpleName());
-		 } 
-		 System.out.println();
-	 }
-	 
+	public static void printCatalog(ArrayList<Media> catalog) {
+		System.out.printf("%n%-12s%-35s%-20s%n", "Item Code", "Title", "Format");
+		System.out.println("---------   -------------------------------    ------");
+		for (Media item : catalog) {
+			System.out.printf("%-12d%-35s%-20s%n", item.getItemCode(), item.getTitle(),
+					item.getClass().getSimpleName());
+		}
+		System.out.println();
+	}
+
 	public static void searchByGenre(String genre, ArrayList<Media> catalog) {
 		boolean found = false;
 		System.out.println("\nResults:\n");
@@ -310,14 +322,9 @@ public class libraryApp {
 		}
 	}
 
-	public static ArrayList<Media> recycle(ArrayList<Media> catalog) {
+	public static void recycle(ArrayList<Media> catalog, Media item) {
 
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getCondition() == 0) {
-				catalog.remove(i);
-			}
-		}
-		return catalog;
+		catalog.remove(item);
 	}
 
 	public static Book donateBook(ArrayList<Media> catalog) {
@@ -382,7 +389,7 @@ public class libraryApp {
 		}
 		return itemCodeHolder;
 	}
-	
+
 	public static int findNewItemCode(ArrayList<Media> catalog, String format) {
 		int itemCodeHolder = 0;
 		for (int i = 0; i < catalog.size(); i++) {
@@ -396,30 +403,30 @@ public class libraryApp {
 
 	public static ArrayList<Media> formatSeparator(ArrayList<Media> catalog, String format) {
 		if (format.equalsIgnoreCase("book")) {
-		ArrayList<Media> books = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 100 && catalog.get(i).getItemCode() < 200) {
-				books.add(catalog.get(i));
+			ArrayList<Media> books = new ArrayList<Media>();
+			for (int i = 0; i < catalog.size(); i++) {
+				if (catalog.get(i).getItemCode() > 100 && catalog.get(i).getItemCode() < 200) {
+					books.add(catalog.get(i));
+				}
 			}
-		}
-		return books;
+			return books;
 		} else if (format.equalsIgnoreCase("movie")) {
-		ArrayList<Media> movies = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 200 && catalog.get(i).getItemCode() < 300) {
-				movies.add(catalog.get(i));
+			ArrayList<Media> movies = new ArrayList<Media>();
+			for (int i = 0; i < catalog.size(); i++) {
+				if (catalog.get(i).getItemCode() > 200 && catalog.get(i).getItemCode() < 300) {
+					movies.add(catalog.get(i));
+				}
 			}
-		}
-		return movies;
+			return movies;
 		} else {
-		
-		ArrayList<Media> games = new ArrayList<Media>();
-		for (int i = 0; i < catalog.size(); i++) {
-			if (catalog.get(i).getItemCode() > 300 && catalog.get(i).getItemCode() < 400) {
-				games.add(catalog.get(i));
+
+			ArrayList<Media> games = new ArrayList<Media>();
+			for (int i = 0; i < catalog.size(); i++) {
+				if (catalog.get(i).getItemCode() > 300 && catalog.get(i).getItemCode() < 400) {
+					games.add(catalog.get(i));
+				}
 			}
-		}
-		return games;
+			return games;
 		}
 	}
 }
